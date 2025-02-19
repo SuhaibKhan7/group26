@@ -2,7 +2,8 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./schema.js";
 import db from "./db.js";
-
+import { v4 as uuidv4 } from "uuid";
+import fs from "fs";
 const productTypes = ["PhysicalProduct", "DigitalProduct"];
 const resolvers = {
   Query: {
@@ -29,24 +30,7 @@ const resolvers = {
   //     return db.Users.find((user) => user.id === parent.sellerId);
   //   },
   // },
-
-  Product: {
-    __resolveType: (obj) => {
-      console.log("......" + obj.name);
-      return obj.__typename;
-    },
-    // Required for interfaces
-  },
 };
-const commonSellerResolver = (parent) => {
-  console.log("📌 Resolving seller for:", parent.name);
-  return db.Users.find((user) => user.id === parent.sellerId) || null;
-};
-
-// Assign seller resolver to all product types dynamically
-productTypes.forEach((type) => {
-  resolvers[type] = { seller: commonSellerResolver };
-});
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
