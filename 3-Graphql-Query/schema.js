@@ -1,11 +1,12 @@
 export const typeDefs = `#graphql
 
-inteface Product{
+interface Product{
     id: ID!
     name: String!
     price:Float!
     category: String!
     sellerId: ID!
+    seller:User
 }
 type PhysicalProduct implements Product{
     id: ID!
@@ -16,8 +17,9 @@ type PhysicalProduct implements Product{
     weight:Float!,
     dimensions: String!
     shippingCost:Float!
+    seller:User
 }
-type DigitalProducts implements Product{
+type DigitalProduct implements Product{
     id: ID!
     name: String!
     price:Float!
@@ -26,16 +28,19 @@ type DigitalProducts implements Product{
     fileSize: Float!
     format: String!
     downloadLink: String!
+    seller:User
 
 }
-type Clothes implements Product{
-
+type User{
+    id: ID!
+    name: String!
+    email: String!
 }
-
 type Query{
     products: [Product!]!
     physicalproducts:[PhysicalProduct]!
     digitalproducts:[DigitalProduct]!
+    users:[User!]!
 }
 
 

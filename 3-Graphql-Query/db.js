@@ -1,6 +1,6 @@
 const Users = [
-  { id: 1, name: "Alice", email: "alice@example.com" },
-  { id: 2, name: "Bob", email: "bob@example.com" },
+  { id: 1, sellerid:1,name: "Alice", email: "alice@example.com" },
+  { id: 2, sellerid:1,name: "Bob", email: "bob@example.com" },
 ];
 
 const Products = [
@@ -44,7 +44,7 @@ const Products = [
     category: "Clothes",
     sellerId: 2,
     size: "M",
-    __typename: "Clothes",
+    __typename: "PhysicalProduct",
     length: 1000,
   },
 ];
