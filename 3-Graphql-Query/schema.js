@@ -42,6 +42,13 @@ type Query{
     digitalproducts:[DigitalProduct]!
     users:[User!]!
 }
+type Mutation{
+   createUser(newuser:userinput):User 
+}
+input userinput{
+    name:String!
+    email:String!
+}
 
 
 `;

@@ -7,6 +7,11 @@ export default {
       name: "rose",
       email: "rose@gmail.com",
     },
+    {
+      id: "dca6c6f2-b893-4544-852f-9433717fe2b2",
+      name: "rose",
+      email: "rose@gmail.com",
+    },
   ],
   Products: [
     {
