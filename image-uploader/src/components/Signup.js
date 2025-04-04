@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router";
 function Login() {
   const navigation = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function handleLogin(e) {
+  function handleSignup(e) {
     e.preventDefault();
     console.log(email);
     console.log(password);
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
@@ -24,18 +24,18 @@ function Login() {
   }
   return (
     <div>
-      <h1>Login......</h1>
-      <form action="" onSubmit={handleLogin}>
+      <h1>Signup......</h1>
+      <form action="" onSubmit={handleSignup}>
         <label for="username">Email</label>
         <input type="email" onChange={(e) => setEmail(e.target.value)} />
         <br />
         <label for="username">Password</label>
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
         <br />
-        <button type="submit">Login</button>
+        <button type="submit">Signup</button>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Signup;
