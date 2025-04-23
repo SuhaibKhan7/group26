@@ -1,25 +1,45 @@
-import React from "react";
-import { auth } from "../firebase";
-
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
+export default function Dashboard() {
+  const [file, setFile] = useState("");
+  const navigate = useNavigate();
 
-function Dashboard() {
   function handleLogout() {
     signOut(auth)
       .then(() => {
         console.log("Logged out");
-        // Sign-out successful.
+        alert("logout successfull");
+        navigate("/");
       })
-      .catch((error) => {
-        // An error happened.
-      });
+      .catch((error) => {});
   }
+  function handleFile(e) {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+    console.log(file);
+  }
+
+  function fileUpload() {}
+
   return (
     <div>
       <p>Dashboard</p>
       <button onClick={handleLogout}>Logout</button>
+
+      <form onSubmit={fileUpload}>
+        <input type="file" name="" id="" onChange={handleFile} />
+        <button type="submit">UPLOAD</button>
+      </form>
     </div>
   );
 }
-
-export default Dashboard;

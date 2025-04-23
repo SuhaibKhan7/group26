@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router";
-function Login() {
+function Signup() {
   const navigation = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        alert("login successfull");
+        alert("Signup successfull");
         navigation("/dashboard");
       })
       .catch((error) => {
