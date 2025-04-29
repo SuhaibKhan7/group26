@@ -1,16 +1,18 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB4rlpP2YRv636AZXfwt5L6MJWNe6IWFo0",
-  authDomain: "budget-tracker-ccc73.firebaseapp.com",
-  databaseURL: "https://budget-tracker-ccc73-default-rtdb.firebaseio.com",
-  projectId: "budget-tracker-ccc73",
-  storageBucket: "budget-tracker-ccc73.firebasestorage.app",
-  messagingSenderId: "218529118920",
-  appId: "1:218529118920:web:cd4d9bcea7697e0dd283fd",
-  measurementId: "G-M5ENZ2WZXD",
+  apiKey: "AIzaSyBVNBk_YG_O9z0Qz5yamGmWygXpIFn0Uu4",
+  authDomain: "imageuploader-10f7e.firebaseapp.com",
+  databaseURL: "https://imageuploader-10f7e-default-rtdb.firebaseio.com",
+  projectId: "imageuploader-10f7e",
+  storageBucket: "imageuploader-10f7e.firebasestorage.app",
+  messagingSenderId: "1080137793015",
+  appId: "1:1080137793015:web:2bab0891ece0ae3f8582f2",
+  measurementId: "G-CHD67372LQ",
 };
+
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);

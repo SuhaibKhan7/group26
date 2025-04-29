@@ -1,39 +1,56 @@
 import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
+
 function Signup() {
-  const navigation = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
+
+  let navigate = useNavigate();
+
   function handleSignup(e) {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
+    console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        alert("Signup successfull");
-        navigation("/dashboard");
+        alert("User Created..");
+        navigate("/login");
+        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setError(errorCode);
+        setMessage(errorMessage);
+        console.log(error);
+        if (message == "auth/invalid-credential")
+          setMessage("Invalid email or password");
       });
   }
   return (
     <div>
-      <h1>Signup......</h1>
+      <h3>Signup</h3>
+
       <form action="" onSubmit={handleSignup}>
-        <label for="username">Email</label>
-        <input type="email" onChange={(e) => setEmail(e.target.value)} />
-        <br />
-        <label for="username">Password</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <br />
+        <input
+          type="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <input
+          type="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
         <button type="submit">Signup</button>
       </form>
+      {message && <p style={{ color: "orange" }}>{message}</p>}
     </div>
   );
 }
