@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth ,db} from "../firebase";
 import { signOut } from "firebase/auth";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { collection, addDoc } from "firebase/firestore";
 
 function Dashboard() {
   const [file, setFile] = useState(null);
@@ -41,9 +42,25 @@ function Dashboard() {
     );
     console.log(response);
 
+    const imageurl = response.data.secure_url;
+    console.log(imageurl);
 
+    const user = auth.currentUser;
+    if (!user) {
+      return;
+    }
 
-    
+    try {
+      const docRef = await addDoc(collection(db, "uploads"), {
+       uid:user.uid,
+       imageurl:imageurl,
+       uploadAt:new Date()
+      });
+      alert("image Uploaded");
+      setUploading(false);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   }
   return (
     <div>
