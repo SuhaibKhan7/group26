@@ -12,6 +12,11 @@ function Dashboard() {
   const [images, setImages] = useState([]);
 
   const navigate = useNavigate();
+
+
+
+
+  
   async function handleLogout() {
     signOut(auth)
       .then(() => {
@@ -61,7 +66,14 @@ function Dashboard() {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
+
+
+
   }
+
+
+
+
   return (
     <div>
       <h1>Dashboard</h1>
